@@ -33,7 +33,7 @@
 <body>
     
 
-    <!-- Topbar Start -->
+    {{-- <!-- Topbar Start -->
     <div class="container-fluid d-none d-lg-block">
         <div class="row align-items-center bg-dark px-lg-5">
             <div class="col-lg-9">
@@ -60,13 +60,23 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div> --}}
 
-
-    @include('partials.navbar')
-
+    @include('dashboard.layouts.header')
     
-    @yield('container')
+    
+
+    <div class="container-fluid">
+        <div class="row">
+          @include('dashboard.layouts.sidebar')
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+                @yield('container')
+
+            </main>
+        </div>
+    </div>
 
 
     <!-- Footer Start -->

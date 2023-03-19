@@ -5,7 +5,7 @@
 {{-- @dd($books) --}}
 <div class="container-fluid py-4 pt-3 mb-3" id="container">
     <div class="container py-4">
-        <div class="section-title bg-dark">
+        <div class="section-title">
             @if ($books->count() > 0)
                 
             <div class="col-md-12">

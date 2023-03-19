@@ -12,6 +12,25 @@
                 <a href="/categories" class="nav-item nav-link {{ Request::path() === 'categories' ? 'active':'' }}">Categories</a>
                 <a href="/books" class="nav-item nav-link {{ Request::path() === 'books' ? 'active':'' }}">Books</a>
                 <a href="/about" class="nav-item nav-link {{ Request::path() === 'about' ? 'active':'' }}">About</a>
+
+                @auth
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Welcome Back, {{ auth()->user()->name }}
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/dashboard">My Dashboard</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <form action="/logout" method="post">
+                        @csrf
+                        <button type="submit" class="dropdown-item">Logout</button>
+                      </form>
+                    </ul>
+                </li>
+                @else
+                <a href="/login" class="nav-item nav-link {{ Request::path() === 'login' ? 'active':'' }}">Login</a>
+                @endauth
+
             </div>
             <div class="" style="width: 100%; max-width: 300px;"> 
                 <form action="/books">
