@@ -11,14 +11,22 @@
   
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <div class="section-title">
+        
         @if ($books->count() > 0)
             
         <div class="col-md-12">
+            
             <div class="page-header clearfix">
                 <h6 style="text-align: right;" class="pull-left">TOTAL JUDUL : {{ $books->total() }}
                 {{-- <br>TOTAL BUKU : ..</h6> --}}
                 <h4 style="text-align: center;"><strong>{{ $header }}</strong></h4>
             </div>
+            @if (session()->has('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+              </div>
+            @endif
+            <a href="/dashboard/books/create" class="btn btn-primary mb-3">Tambah Buku</a>
             <div class="table-responsive table-hover">
                 <table class='table table-bordered table-striped text-center text-uppercase'>
                     <thead class='thead-dark'>
@@ -37,14 +45,14 @@
                         @foreach ($books as $book)   
                         <tr>
                             <td>{{ $books->count() * ($books->currentPage() - 1) + $loop->iteration }}</td>
-                            <td><a href="/dashboard/books?kategori={{ $book->categories->name }}">{{ $book->categories->name }}</a></td>
+                            <td><a href="/dashboard/books?kategori={{ $book->categories->name }}" class="text-decoration-none">{{ $book->categories->name }}</a></td>
                             <td>{{ $book->judul }}</td>
                             <td>{{ $book->penulis }}</td>
                             <td>{{ $book->penerbit }}</td>
                             <td>{{ $book->tahun }}</td>
                             <td>{{ $book->jumlah }}</td>
                             <td>
-                                <a href="" class="badge badge-info">View </a>
+                                {{-- <a href="" class="badge badge-info">View </a> --}}
                                 <a href="" class="badge badge-warning">Edit </a>
                                 <a href="" class="badge badge-danger">Delete</a>
                             </td>

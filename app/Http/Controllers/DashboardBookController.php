@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardBookController extends Controller
 {
@@ -38,7 +39,13 @@ class DashboardBookController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.books.create', [
+            "alamat" => "Jln. Indrajaya II, Blok B, No. 36 Bandung - Jawa Barat",
+            "email" => "Caturwati@gmail.com",
+            "telepon" => "0811-215-339",
+            "title" => "Dashboard | Create",
+            "categories" => Category::all()
+        ]);
     }
 
     /**
@@ -49,7 +56,19 @@ class DashboardBookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'category_id' => 'required',
+            'judul' => 'required|max:255',
+            'slug' => 'required|unique:books',
+            'penulis' => 'required|max:255',
+            'penerbit' => 'required|max:255',
+            'tahun' => 'required',
+            'jumlah' => 'required'
+        ]);
+
+        Book::create($validatedData);
+
+        return redirect('/dashboard/books')->with('success', 'Buku berhasil ditambahkan!');
     }
 
     /**
@@ -95,5 +114,11 @@ class DashboardBookController extends Controller
     public function destroy(Book $book)
     {
         //
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Book::class, 'slug', $request->judul);
+        return response()->json(['slug' => $slug]);
     }
 }

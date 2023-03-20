@@ -15,6 +15,7 @@ class BookFactory extends Factory
     {
         return [
             'judul' => $this->faker->sentence(mt_rand(2,5)),
+            'slug' => $this->faker->slug(),
             'penulis' => $this->faker->name(),
             'penerbit' => $this->faker->sentence(mt_rand(2,5)),
             'tahun' => $this->faker->numberBetween(1900, 2023),

@@ -40,4 +40,5 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
+Route::get('/dashboard/books/checkSlug', [DashboardBookController::class, 'checkSlug']);
 Route::resource('/dashboard/books', DashboardBookController::class)->middleware('auth');

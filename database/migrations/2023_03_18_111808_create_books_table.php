@@ -17,6 +17,7 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->foreignId('category_id');
             $table->string('judul');
+            $table->string('slug')->unique();
             $table->string('penulis');
             $table->string('penerbit');
             $table->integer('tahun');

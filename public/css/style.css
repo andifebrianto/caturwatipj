@@ -9696,3 +9696,11 @@ h6,
   border-radius: 0;
   margin-bottom: -1px;
 }
+
+.form-floating input,textarea,select{
+  margin-bottom: -1px;
+}
+
+/* .form-floating textarea{
+  margin-bottom: -1px;
+} */
