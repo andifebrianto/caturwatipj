@@ -6,6 +6,7 @@ use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardBookController extends Controller
 {
@@ -61,10 +62,15 @@ class DashboardBookController extends Controller
             'judul' => 'required|max:255',
             'slug' => 'required|unique:books',
             'penulis' => 'required|max:255',
+            'cover' => 'image|file|max:2024',
             'penerbit' => 'required|max:255',
             'tahun' => 'required',
             'jumlah' => 'required'
         ]);
+
+        if ($request->file('cover')) {
+            $validatedData['cover'] = $request->file('cover')->store('book-covers');
+        }
 
         Book::create($validatedData);
 
@@ -90,7 +96,14 @@ class DashboardBookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        return view('dashboard.books.edit', [
+            "alamat" => "Jln. Indrajaya II, Blok B, No. 36 Bandung - Jawa Barat",
+            "email" => "Caturwati@gmail.com",
+            "telepon" => "0811-215-339",
+            "title" => "Dashboard | Edit",
+            "categories" => Category::all(),
+            'book' => $book
+        ]);
     }
 
     /**
@@ -102,7 +115,33 @@ class DashboardBookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $rules = [
+            'category_id' => 'required',
+            'judul' => 'required|max:255',
+            'penulis' => 'required|max:255',
+            'cover' => 'image|file|max:2048',
+            'penerbit' => 'required|max:255',
+            'tahun' => 'required',
+            'jumlah' => 'required'
+        ];
+
+        if ($request->slug != $book->slug) {
+            $rules['slug'] = 'required|unique:books';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        if ($request->file('cover')) {
+            if($book->cover){
+                Storage::delete($book->cover);
+            }
+            $validatedData['cover'] = $request->file('cover')->store('book-covers');
+        }
+
+        Book::where('id', $book->id)
+            ->update($validatedData);
+
+        return redirect('/dashboard/books')->with('success', 'Data Buku berhasil diupdate!');
     }
 
     /**
@@ -113,7 +152,11 @@ class DashboardBookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        if($book->cover){
+            Storage::delete($book->cover);
+        }
+        Book::destroy($book->id);
+        return redirect('/dashboard/books')->with('success', 'Buku berhasil dihapus!');
     }
 
     public function checkSlug(Request $request)

@@ -12,15 +12,16 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="page-header">
-                                        <h2>TAMBAH BUKU</h2>
+                                        <h2>UBAH DATA BUKU</h2>
                                     </div>
-                                    <p>Silahkan isi form untuk menambahkan data buku ke dalam database.</p>
-                                    <form action="/dashboard/books" method="post" enctype="multipart/form-data">
+                                    <p>Silahkan masukan pembaruan yang diperlukan.</p>
+                                    <form action="/dashboard/books/{{ $book->slug }}" method="post" enctype="multipart/form-data">
+                                        @method('put')
                                         @csrf
                                         
                                         <div class="form-floating">
                                             {{-- <label><strong>Judul Buku</strong></label> --}}
-                                            <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror rounded-top" placeholder="Masukkan judul" autofocus id="judul" value="{{ old('judul') }}" required>
+                                            <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror rounded-top" placeholder="Masukkan judul" autofocus id="judul" value="{{ old('judul', $book->judul) }}" required>
                                             <label for="judul"><strong>JUDUL</strong></label>
                                             @error('judul')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -28,7 +29,7 @@
                                         </div>
                                         <div class="form-floating">
                                             {{-- <label><strong>Slug</strong></label><br><em>Ketik ulang judul jika slug tidak muncul</em> --}}
-                                            <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror" placeholder="slug" id="slug" value="{{ old('slug') }}" required>
+                                            <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror" placeholder="slug" id="slug" value="{{ old('slug', $book->slug) }}" required>
                                             <label for="slug"><strong>SLUG</strong> (Jika error, buat slug baru)</label>
                                             @error('slug')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -39,7 +40,7 @@
                     
                                             <select name="category_id" class="form-select" id="floatingSelect">
                                                 @foreach ($categories as $cat)
-                                                    @if (old('category_id') == $cat->id)
+                                                    @if (old('category_id', $book->category_id) == $cat->id)
                                                         <option value="{{ $cat->id }}" selected>{{ $cat->name }}</option>
                                                     @else
                                                         <option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -52,14 +53,19 @@
                                         <div class="mb-3 form-floating">
                                             <input class="form-control @error('cover') is-invalid @enderror" type="file" id="cover" name="cover" onchange="previewImage()">
                                             <label for="cover"><strong>COVER BUKU</strong> (max: 2MB)</label>
-                                            <img class="img-preview img-fluid col-sm-5" id="frame">
+                                            @if ($book->cover)
+                                                <img class="img-preview img-fluid col-sm-5" src="{{ asset('storage/' . $book->cover) }}" id="frame">
+                                            @else
+                                                <img class="img-preview img-fluid col-sm-5" id="frame">
+                                            @endif
+
                                             @error('cover')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-floating">
                                             {{-- <label><strong>Nama Penulis</strong></label><br><em>Jika 2 penulis atau lebih gunakan enter</em> --}}
-                                            <textarea name="penulis" class="form-control @error('penulis') is-invalid @enderror" placeholder="Masukkan nama penulis" required id="floatingTextarea" style="height: 100px">{{ old('penulis') }}</textarea>
+                                            <textarea name="penulis" class="form-control @error('penulis') is-invalid @enderror" placeholder="Masukkan nama penulis" required id="floatingTextarea" style="height: 100px">{{ old('penulis', $book->penulis) }}</textarea>
                                             <label for="floatingTextarea1"><strong>PENULIS</strong> (Jika 2 penulis atau lebih gunakan enter)</label>
                                             @error('penulis')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -67,7 +73,7 @@
                                         </div>
                                         <div class="form-floating">
                                             {{-- <label><strong>Penerbit</strong></label><br><em>Jika 2 penerbit atau lebih gunakan enter</em> --}}
-                                            <textarea name="penerbit" class="form-control @error('penerbit') is-invalid @enderror" placeholder="Masukkan penerbit" required id="floatingTextarea2" style="height: 100px">{{ old('penerbit') }}</textarea>
+                                            <textarea name="penerbit" class="form-control @error('penerbit') is-invalid @enderror" placeholder="Masukkan penerbit" required id="floatingTextarea2" style="height: 100px">{{ old('penerbit', $book->penerbit) }}</textarea>
                                             <label for="floatingTextarea2"><strong>PENERBIT</strong> (Jika 2 penerbit atau lebih gunakan enter)</label>
                                             @error('penerbit')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -75,7 +81,7 @@
                                         </div>
                                         <div class="form-floating">
                                             {{-- <label><strong>Tahun</strong></label> --}}
-                                            <input type="number" name="tahun" class="form-control @error('tahun') is-invalid @enderror" placeholder="Masukkan tahun" value="{{ old('tahun') }}" required id="floatingTahun">
+                                            <input type="number" name="tahun" class="form-control @error('tahun') is-invalid @enderror" placeholder="Masukkan tahun" value="{{ old('tahun', $book->tahun) }}" required id="floatingTahun">
                                             <label for="floatingTahun"><strong>TAHUN</strong></label>
                                             @error('tahun')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -83,15 +89,15 @@
                                         </div>
                                         <div class="form-floating">
                                             {{-- <label><strong>Jumlah</strong></label> --}}
-                                            <input type="number" value="{{ old('jumlah') }}" placeholder="Masukkan jumlah buku" name="jumlah" class="form-control @error('jumlah') is-invalid @enderror rounded-bottom" required id="floatingJumlah">
+                                            <input type="number" value="{{ old('jumlah', $book->jumlah) }}" placeholder="Masukkan jumlah buku" name="jumlah" class="form-control @error('jumlah') is-invalid @enderror rounded-bottom" required id="floatingJumlah">
                                             <label for="floatingJumlah"><strong>JUMLAH</strong></label>
                                             @error('jumlah')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <button type="submit" class="btn btn-primary my-3">SIMPAN</button>
+                                        <button type="submit" class="btn btn-primary my-3">UPDATE BUKU</button>
                                         {{-- <input type="submit" class="btn btn-primary" value="Simpan"> --}}
-                                        <a href="" class="btn btn-default">KEMBALI</a>
+                                        <a href="" class="btn btn-default">BATAL</a>
                                     </form>
                                 </div>
                             </div>
@@ -113,21 +119,9 @@
             .then(data => slug.value = data.slug)
     });
 
-    // preview gambar
-    // function previewImage(){
-    //     const cover = document.querySelector('#cover');
-    //     const imgPreview = document.querySelector('.img-preview');
-
-    //     imgPreview.style.display = 'block';
-
-    //     const blob = URL.createObjectURL(cover.files[0]);
-    //     imgPreview.src = blob;
-    // }
-
     function previewImage() {
             frame.src=URL.createObjectURL(event.target.files[0]);
         }
-
 </script>
 
 {{-- slug tanpa cek duplikat --}}

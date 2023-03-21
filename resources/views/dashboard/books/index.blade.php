@@ -53,8 +53,13 @@
                             <td>{{ $book->jumlah }}</td>
                             <td>
                                 {{-- <a href="" class="badge badge-info">View </a> --}}
-                                <a href="" class="badge badge-warning">Edit </a>
-                                <a href="" class="badge badge-danger">Delete</a>
+                                <a href="/dashboard/books/{{ $book->slug }}/edit" class="badge badge-warning">Edit </a>
+                                <form action="/dashboard/books/{{ $book->slug }}" method="post" class="d-inline">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="badge badge-danger border-0" onClick="return confirm('Hapus data?')">Delete</button>
+                                </form>
+                                {{-- <a href="" class="badge badge-danger">Delete</a> --}}
                             </td>
                         </tr>
                         @endforeach
