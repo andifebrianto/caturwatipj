@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Profil;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 
@@ -22,9 +23,7 @@ class BookController extends Controller
             $header = 'KATEGORI : ' . $kategori->name;
         }
         return view('books', [
-            "alamat" => "Jln. Indrajaya II, Blok B, No. 36 Bandung - Jawa Barat",
-            "email" => "Caturwati@gmail.com",
-            "telepon" => "0811-215-339",
+            "profil" => Profil::all(),
             "title" => "Admin",
             "header" => $header,
             // "no" => 1,

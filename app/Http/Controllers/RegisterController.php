@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Profil;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -13,9 +14,7 @@ class RegisterController extends Controller
     {
         return view('register.index',[
             'title' => 'Register',
-            "alamat" => "Jln. Indrajaya II, Blok B, No. 36 Bandung - Jawa Barat",
-            "email" => "Caturwati@gmail.com",
-            "telepon" => "0811-215-339",
+            "profil" => Profil::all(),
             "categories" => Category::all() 
         ]);
     }

@@ -7,6 +7,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardBookController;
+use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TestController;
@@ -43,5 +44,6 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 Route::get('/dashboard/books/checkSlug', [DashboardBookController::class, 'checkSlug']);
 Route::resource('/dashboard/books', DashboardBookController::class)->middleware('auth');
+Route::resource('/dashboard/categories', DashboardCategoryController::class)->middleware('auth');
 
 Route::get('/test', [TestController::class, 'index']);

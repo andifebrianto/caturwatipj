@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Book;
+use App\Models\Profil;
 
 class DashboardController extends Controller
 {
@@ -16,9 +17,7 @@ class DashboardController extends Controller
             $header = 'KATEGORI : ' . $kategori->name;
         }
         return view('dashboard.index', [
-            "alamat" => "Jln. Indrajaya II, Blok B, No. 36 Bandung - Jawa Barat",
-            "email" => "Caturwati@gmail.com",
-            "telepon" => "0811-215-339",
+            "profil" => Profil::all(),
             "title" => "Dashboard",
             "header" => $header,
             "categories" => Category::all(), 

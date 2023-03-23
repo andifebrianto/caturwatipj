@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Profil;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 
@@ -16,9 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('categories',[
-            "alamat" => "Jln. Indrajaya II, Blok B, No. 36 Bandung - Jawa Barat",
-            "email" => "Caturwati@gmail.com",
-            "telepon" => "0811-215-339",
+            "profil" => Profil::all(),
             "title" => "Kategori",
             "categories" => Category::all()
         ]);

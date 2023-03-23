@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Profil;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -12,9 +13,7 @@ class LoginController extends Controller
     {
         return view('login.index',[
             'title' => 'Login',
-            "alamat" => "Jln. Indrajaya II, Blok B, No. 36 Bandung - Jawa Barat",
-            "email" => "Caturwati@gmail.com",
-            "telepon" => "0811-215-339",
+            "profil" => Profil::all(),
             "categories" => Category::all() 
         ]);
     }

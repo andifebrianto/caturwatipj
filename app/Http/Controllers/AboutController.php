@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Profil;
 
 class AboutController extends Controller
 {
@@ -15,10 +16,7 @@ class AboutController extends Controller
     public function index()
     {
         return view('about', [
-            "alamat" => "Jln. Indrajaya II, Blok B, No. 36 Bandung - Jawa Barat",
-            "email" => "Caturwati@gmail.com",
-            "telepon" => "0811-215-339",
-            "deskripsi" => "Caturwati Library merupakan perpustakaan yang dikekola secara pribadi oleh Prof. DR. Endang Caturwati, S.ST, M.S.",
+            "profil" => Profil::all(),
             "title" => "Tentang",
             "categories" => Category::all() 
         ]);

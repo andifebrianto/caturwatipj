@@ -26,7 +26,7 @@
                 {{ session('success') }}
               </div>
             @endif
-            <a href="/dashboard/books/create" class="btn btn-primary mb-3">Tambah Buku</a>
+            {{-- <a href="/dashboard/books/create" class="btn btn-primary mb-3">Tambah Buku</a> --}}
             <div class="table-responsive table-hover">
                 <table class='table table-bordered table-striped text-center text-uppercase'>
                     <thead class='thead-dark'>
@@ -67,7 +67,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
-                    {{ $books->onEachSide(1)->links() }}
+                    {{ $books->onEachSide(0)->links() }}
                 </div>
             </div>
         </div>

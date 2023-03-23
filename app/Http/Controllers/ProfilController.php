@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Category;
 use App\Models\Profil;
+use App\Http\Requests\StoreProfilRequest;
+use App\Http\Requests\UpdateProfilRequest;
 
-class HomeController extends Controller
+class ProfilController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = Category::offset(10)->latest()->limit(4)->get();
-        return view('home', [
-            "profil" => Profil::all(),
-            "title" => "Home",
-            "categories" => Category::all(),
-            "category_4" => $data
-        ]);
+        //
     }
 
     /**
@@ -37,10 +31,10 @@ class HomeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreProfilRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProfilRequest $request)
     {
         //
     }
@@ -48,10 +42,10 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Profil  $profil
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Profil $profil)
     {
         //
     }
@@ -59,10 +53,10 @@ class HomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Profil  $profil
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Profil $profil)
     {
         //
     }
@@ -70,11 +64,11 @@ class HomeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdateProfilRequest  $request
+     * @param  \App\Models\Profil  $profil
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProfilRequest $request, Profil $profil)
     {
         //
     }
@@ -82,10 +76,10 @@ class HomeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Profil  $profil
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Profil $profil)
     {
         //
     }

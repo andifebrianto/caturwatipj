@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Profil;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,9 +24,7 @@ class DashboardBookController extends Controller
             $header = 'KATEGORI : ' . $kategori->name;
         }
         return view('dashboard.books.index', [
-            "alamat" => "Jln. Indrajaya II, Blok B, No. 36 Bandung - Jawa Barat",
-            "email" => "Caturwati@gmail.com",
-            "telepon" => "0811-215-339",
+            "profil" => Profil::all(),
             "title" => "Dashboard | Books",
             "header" => $header,
             "categories" => Category::all(), 
@@ -41,9 +40,7 @@ class DashboardBookController extends Controller
     public function create()
     {
         return view('dashboard.books.create', [
-            "alamat" => "Jln. Indrajaya II, Blok B, No. 36 Bandung - Jawa Barat",
-            "email" => "Caturwati@gmail.com",
-            "telepon" => "0811-215-339",
+            "profil" => Profil::all(),
             "title" => "Dashboard | Create",
             "categories" => Category::all()
         ]);
@@ -97,9 +94,7 @@ class DashboardBookController extends Controller
     public function edit(Book $book)
     {
         return view('dashboard.books.edit', [
-            "alamat" => "Jln. Indrajaya II, Blok B, No. 36 Bandung - Jawa Barat",
-            "email" => "Caturwati@gmail.com",
-            "telepon" => "0811-215-339",
+            "profil" => Profil::all(),
             "title" => "Dashboard | Edit",
             "categories" => Category::all(),
             'book' => $book

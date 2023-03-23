@@ -28,6 +28,9 @@
     {{-- {{ URL::asset('/') }} --}}
     <link href="{{ URL::asset('/') }}css/style.css" rel="stylesheet">
 
+    <!-- Custom styles for sidebar -->
+    {{-- <link href="{{ URL::asset('/') }}css/sidebars.css" rel="stylesheet"> --}}
+
 
 </head>
 <body>
@@ -101,9 +104,9 @@
 
             <div class="col-lg-3 col-md-6 mb-5">
                 <h5 class="mb-4 text-white text-uppercase font-weight-bold text-center">Caturwati Library</h5>
-                <p class="font-weight-medium text-center"><i class="fa fa-map-marker-alt mr-2"></i>{{ $alamat }}</p>
-                <p class="font-weight-medium text-center"><i class="fa fa-phone-alt mr-2"></i>{{ $telepon }}</p>
-                <p class="font-weight-medium text-center"><i class="fa fa-envelope mr-2"></i>{{ $email }}</p>
+                <p class="font-weight-medium text-center"><i class="fa fa-map-marker-alt mr-2"></i>{{ $profil[0]->alamat }}</p>
+                <p class="font-weight-medium text-center"><i class="fa fa-phone-alt mr-2"></i>{{ $profil[0]->email }}</p>
+                <p class="font-weight-medium text-center"><i class="fa fa-envelope mr-2"></i>{{ $profil[0]->telepon }}</p>
                 <div class="col card-header text-center">
                     <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
                     <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
@@ -152,5 +155,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    {{-- <script src="js/sidebars.js"></script> --}}
 </body>
 </html>
