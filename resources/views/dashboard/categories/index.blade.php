@@ -11,10 +11,9 @@
                 <div class="row">
                     {{-- <div class="col-md-12"> --}}
                     <div class="page-header">
-                        {{-- <a href="/dashboard/categories/create" class="btn btn-primary font-weight-bold mb-3 ">TAMBAH KATEGORI</a> --}}
+                        <a href="/dashboard/categories/create" class="btn btn-primary font-weight-bold mb-3 ">TAMBAH KATEGORI</a>
 
-                        <button type="button" class="btn btn-primary font-weight-bold mb-3" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal" data-bs-whatever="@mdo">TAMBAH KATEGORI</button>
+                        {{-- <button type="button" class="btn btn-primary font-weight-bold mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">TAMBAH KATEGORI</button> --}}
 
 
                         @if ($categories->count() > 0)
@@ -42,9 +41,9 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="/dashboard/categories/{{ $cat->name }}/edit"
+                                                    <a href="/dashboard/categories/{{ $cat->slug }}/edit"
                                                         class="badge badge-warning">Edit </a>
-                                                    <form action="/dashboard/categories/{{ $cat->name }}" method="post"
+                                                    <form action="/dashboard/categories/{{ $cat->slug }}" method="post"
                                                         class="d-inline">
                                                         @method('delete')
                                                         @csrf

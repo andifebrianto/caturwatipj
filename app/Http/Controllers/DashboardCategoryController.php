@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Profil;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardCategoryController extends Controller
 {
@@ -32,7 +34,11 @@ class DashboardCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.categories.create', [
+            "profil" => Profil::all(),
+            "title" => "Dashboard | Create Category",
+            "categories" => Category::all()
+        ]);
     }
 
     /**
@@ -45,6 +51,7 @@ class DashboardCategoryController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255|unique:categories',
+            'slug' => 'required|unique:categories',
             'cover' => 'image|file|max:2024'
         ]);
 
@@ -76,7 +83,12 @@ class DashboardCategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('dashboard.categories.edit', [
+            "profil" => Profil::all(),
+            "title" => "Dashboard | Edit Category",
+            "categories" => Category::all(),
+            'category' => $category
+        ]);
     }
 
     /**
@@ -88,7 +100,27 @@ class DashboardCategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $rules = [
+            'name' => 'required|max:255'
+        ];
+
+        if ($request->slug != $category->slug) {
+            $rules['slug'] = 'required|unique:categories';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        if ($request->file('cover')) {
+            if($category->cover){
+                Storage::delete($category->cover);
+            }
+            $validatedData['cover'] = $request->file('cover')->store('category-covers');
+        }
+
+        Category::where('id', $category->id)
+            ->update($validatedData);
+
+        return redirect('/dashboard/categories')->with('success', 'Kategori berhasil diubah!');
     }
 
     /**
@@ -99,6 +131,16 @@ class DashboardCategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if($category->cover){
+            Storage::delete($category->cover);
+        }
+        Category::destroy($category->id);
+        return redirect('/dashboard/categories')->with('success', 'Kategori berhasil dihapus!');
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Category::class, 'slug', $request->name);
+        return response()->json(['slug' => $slug]);
     }
 }

@@ -41,7 +41,7 @@ class DashboardBookController extends Controller
     {
         return view('dashboard.books.create', [
             "profil" => Profil::all(),
-            "title" => "Dashboard | Create",
+            "title" => "Dashboard | Create Book",
             "categories" => Category::all()
         ]);
     }
@@ -58,11 +58,11 @@ class DashboardBookController extends Controller
             'category_id' => 'required',
             'judul' => 'required|max:255',
             'slug' => 'required|unique:books',
-            'penulis' => 'required|max:255',
+            'penulis' => 'max:255',
             'cover' => 'image|file|max:2024',
-            'penerbit' => 'required|max:255',
-            'tahun' => 'required',
-            'jumlah' => 'required'
+            'penerbit' => 'max:255',
+            'tahun' => '',
+            'jumlah' => ''
         ]);
 
         if ($request->file('cover')) {
@@ -95,7 +95,7 @@ class DashboardBookController extends Controller
     {
         return view('dashboard.books.edit', [
             "profil" => Profil::all(),
-            "title" => "Dashboard | Edit",
+            "title" => "Dashboard | Edit Book",
             "categories" => Category::all(),
             'book' => $book
         ]);
@@ -113,11 +113,11 @@ class DashboardBookController extends Controller
         $rules = [
             'category_id' => 'required',
             'judul' => 'required|max:255',
-            'penulis' => 'required|max:255',
+            'penulis' => 'max:255',
             'cover' => 'image|file|max:2048',
-            'penerbit' => 'required|max:255',
-            'tahun' => 'required',
-            'jumlah' => 'required'
+            'penerbit' => 'max:255',
+            'tahun' => '',
+            'jumlah' => ''
         ];
 
         if ($request->slug != $book->slug) {

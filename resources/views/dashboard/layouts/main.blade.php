@@ -8,7 +8,7 @@
 
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    {{-- <link href="img/favicon.ico" rel="icon"> --}}
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -18,7 +18,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="{{ URL::asset('/') }}lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     {{-- css online --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -145,8 +145,8 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script> --}}
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="{{ URL::asset('/') }}lib/easing/easing.min.js"></script>
+    <script src="{{ URL::asset('/') }}lib/owlcarousel/owl.carousel.min.js"></script>
 
     {{-- js online --}}
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
@@ -154,7 +154,7 @@
     
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="{{ URL::asset('/') }}js/main.js"></script>
 
     {{-- <script src="js/sidebars.js"></script> --}}
 </body>

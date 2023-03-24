@@ -15,7 +15,8 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->sentence(mt_rand(1,2)),
-            'cover' => $this->faker->lexify()
+            'slug' => $this->faker->slug(),
+            // 'cover' => $this->faker->lexify()
         ];
     }
 }

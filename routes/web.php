@@ -43,6 +43,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::get('/dashboard/books/checkSlug', [DashboardBookController::class, 'checkSlug']);
+Route::get('/dashboard/categories/checkSlug', [DashboardCategoryController::class, 'checkSlug']);
+
 Route::resource('/dashboard/books', DashboardBookController::class)->middleware('auth');
 Route::resource('/dashboard/categories', DashboardCategoryController::class)->middleware('auth');
 
