@@ -18,7 +18,7 @@
             
             <div class="page-header clearfix">
                 <h6 style="text-align: right;" class="pull-left">TOTAL JUDUL : {{ $books->total() }}
-                {{-- <br>TOTAL BUKU : ..</h6> --}}
+                <br>TOTAL BUKU : {{ $totalbuku }}</h6>
                 <h4 style="text-align: center;"><strong>{{ $header }}</strong></h4>
             </div>
             @if (session()->has('success'))
@@ -26,7 +26,7 @@
                 {{ session('success') }}
               </div>
             @endif
-            {{-- <a href="/dashboard/books/create" class="btn btn-primary mb-3">Tambah Buku</a> --}}
+            <a href="/dashboard/books/create" class="btn btn-primary font-weight-bold mb-3">Tambah Buku</a>
             <div class="table-responsive table-hover">
                 <table class='table table-bordered table-striped text-center text-uppercase'>
                     <thead class='thead-dark'>
@@ -44,7 +44,8 @@
                     <tbody>
                         @foreach ($books as $book)   
                         <tr>
-                            <td>{{ $books->count() * ($books->currentPage() - 1) + $loop->iteration }}</td>
+                            {{-- <td>{{ $books->count() * ($books->currentPage() - 1) + $loop->iteration }}</td> --}}
+                            <td>{{ ++$i }}</td>
                             <td><a href="/dashboard/books?kategori={{ $book->categories->name }}" class="text-decoration-none">{{ $book->categories->name }}</a></td>
                             <td>{{ $book->judul }}</td>
                             <td>{{ $book->penulis }}</td>

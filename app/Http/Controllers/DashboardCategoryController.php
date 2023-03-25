@@ -15,16 +15,17 @@ class DashboardCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $header = 'ALL CATEGORIES';
+        $pagination = 10;
 
         return view('/dashboard.categories.index', [
             "profil" => Profil::all(),
             "title" => "Dashboard | Categories",
             "header" => $header,
-            "categories" => Category::latest()->paginate(5)
-        ]);
+            "categories" => Category::latest()->paginate(10)
+        ])->with('i', ($request->input('page', 1) - 1) * $pagination);
     }
 
     /**

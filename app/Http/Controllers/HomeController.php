@@ -15,12 +15,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = Category::offset(10)->latest()->limit(4)->get();
+        // $data = Category::offset(10)->latest()->limit(4)->get();
         return view('home', [
             "profil" => Profil::all(),
             "title" => "Home",
             "categories" => Category::all(),
-            "category_4" => $data
+            "category_4" => Category::latest()->limit(4)->get()
         ]);
     }
 

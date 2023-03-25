@@ -19,7 +19,7 @@ class CategoryController extends Controller
         return view('categories',[
             "profil" => Profil::all(),
             "title" => "Kategori",
-            "categories" => Category::all()
+            "categories" => Category::latest()->get()
         ]);
     }
 

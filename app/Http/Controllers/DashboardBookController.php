@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Profil;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class DashboardBookController extends Controller
 {
@@ -16,9 +17,12 @@ class DashboardBookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $header = 'INFORMASI BUKU';
+        $pagination = 10;
+        $totalbuku = DB::table('books')->sum('jumlah');
+
         if (request('kategori')) {
             $kategori = Category::firstWhere('name', request('kategori'));
             $header = 'KATEGORI : ' . $kategori->name;
@@ -28,8 +32,9 @@ class DashboardBookController extends Controller
             "title" => "Dashboard | Books",
             "header" => $header,
             "categories" => Category::all(), 
-            "books" => Book::latest()->filter(request(['cari', 'kategori']))->paginate(10)
-        ]);
+            "books" => Book::latest()->filter(request(['cari', 'kategori']))->paginate(10),
+            "totalbuku" => $totalbuku
+        ])->with('i', ($request->input('page', 1) - 1) * $pagination);
     }
 
     /**

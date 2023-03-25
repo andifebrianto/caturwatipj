@@ -11,7 +11,12 @@
                 <div class="row">
                     {{-- <div class="col-md-12"> --}}
                     <div class="page-header">
-                        <a href="/dashboard/categories/create" class="btn btn-primary font-weight-bold mb-3 ">TAMBAH KATEGORI</a>
+                        <div class="page-header clearfix">
+                            <h6 style="text-align: right;" class="pull-left">TOTAL KATEGORI : {{ $categories->total() }}
+                            {{-- <br>TOTAL BUKU : ..</h6> --}}
+                            <h4 style="text-align: center;"><strong>{{ $header }}</strong></h4>
+                        </div>
+                        <a href="/dashboard/categories/create" class="btn btn-primary font-weight-bold mb-3 ">Tambah Kategori</a>
 
                         {{-- <button type="button" class="btn btn-primary font-weight-bold mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">TAMBAH KATEGORI</button> --}}
 
@@ -30,7 +35,8 @@
                                     <tbody>
                                         @foreach ($categories as $cat)
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
+                                                {{-- <td>{{ $categories->count() * ($categories->currentPage() - 1) + $loop->iteration }}</td> --}}
+                                                <td>{{ ++$i }}</td>
                                                 <td>{{ $cat->name }}</td>
                                                 <td>
                                                     @if ($cat->cover)
@@ -56,6 +62,9 @@
 
                                     </tbody>
                                 </table>
+                                <div class="d-flex justify-content-center">
+                                    {{ $categories->onEachSide(0)->links() }}
+                                </div>
                             </div>
                         @else
                             <div class="col-md-12 text-center">
