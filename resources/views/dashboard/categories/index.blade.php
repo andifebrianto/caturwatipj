@@ -12,7 +12,7 @@
                     {{-- <div class="col-md-12"> --}}
                     <div class="page-header">
                         <div class="page-header clearfix">
-                            <h6 style="text-align: right;" class="pull-left">TOTAL KATEGORI : {{ $categories->total() }}
+                            {{-- <h6 style="text-align: right;" class="pull-left">TOTAL KATEGORI : {{ $categories->total() }} --}}
                             {{-- <br>TOTAL BUKU : ..</h6> --}}
                             <h4 style="text-align: center;"><strong>{{ $header }}</strong></h4>
                         </div>

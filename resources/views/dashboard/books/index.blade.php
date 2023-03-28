@@ -17,8 +17,8 @@
         <div class="col-md-12">
             
             <div class="page-header clearfix">
-                <h6 style="text-align: right;" class="pull-left">TOTAL JUDUL : {{ $books->total() }}
-                <br>TOTAL BUKU : {{ $totalbuku }}</h6>
+                {{-- <h6 style="text-align: right;" class="pull-left">TOTAL JUDUL : {{ $books->total() }} --}}
+                {{-- <br>TOTAL BUKU : {{ $totalbuku }}</h6> --}}
                 <h4 style="text-align: center;"><strong>{{ $header }}</strong></h4>
             </div>
             @if (session()->has('success'))

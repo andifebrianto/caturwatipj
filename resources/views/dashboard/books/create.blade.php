@@ -51,7 +51,7 @@
                                         </div>
                                         <div class="mb-3 form-floating">
                                             <input class="form-control @error('cover') is-invalid @enderror" type="file" id="cover" name="cover" onchange="previewImage()">
-                                            <label for="cover"><strong>COVER BUKU</strong> (max: 2MB)</label>
+                                            <label for="cover"><strong>COVER BUKU</strong> (max: 2MB | Kosongkan jika tidak ada gambar)</label>
                                             <img class="img-preview img-fluid col-sm-5" id="frame">
                                             @error('cover')
                                                 <div class="invalid-feedback">{{ $message }}</div>

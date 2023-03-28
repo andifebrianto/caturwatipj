@@ -12,27 +12,27 @@
                 <div class="bg-white border border-top-0 p-4 mb-3">
                     <div class="mb-4">
                         <h5 class="text-uppercase font-weight-bold">Caturwati Library</h5>
-                        <p class="mb-4">{{ $deskripsi }}</p>
+                        <p class="mb-4">{{ $profil[0]->deskripsi }}</p>
                         <div class="mb-3">
                             <div class="d-flex align-items-center mb-2">
                                 <i class="fa fa-map-marker-alt text-primary mr-2"></i>
                                 <h5 class="font-weight-bold mb-0">Alamat</h5>
                             </div>
-                            <p class="m-0"></i>{{ $alamat }}</p>
+                            <p class="m-0"></i>{{ $profil[0]->alamat }}</p>
                         </div>
                         <div class="mb-3">
                             <div class="d-flex align-items-center mb-2">
                                 <i class="fa fa-envelope-open text-primary mr-2"></i>
                                 <h5 class="font-weight-bold mb-0">Email</h5>
                             </div>
-                            <p class="m-0">{{ $email }}</p>
+                            <p class="m-0">{{ $profil[0]->email }}</p>
                         </div>
                         <div class="mb-3">
                             <div class="d-flex align-items-center mb-2">
                                 <i class="fa fa-phone-alt text-primary mr-2"></i>
                                 <h5 class="font-weight-bold mb-0">Telepon</h5>
                             </div>
-                            <p class="m-0">{{ $telepon }}</p>
+                            <p class="m-0">{{ $profil[0]->telepon }}</p>
                         </div>
                     </div>
                 </div>

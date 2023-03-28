@@ -60,17 +60,17 @@
       </h6>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/dashboard">
+          <a class="nav-link active" aria-current="page" href="/dashboard/profil/{{ $profil[0]->id }}/edit">
             <span data-feather="home" class="align-text-bottom"></span>
             Ubah Profil
           </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link" href="#">
             <span data-feather="file" class="align-text-bottom"></span>
             Tambah User
           </a>
-        </li>
+        </li> --}}
       </ul>
     </div>
 </nav>

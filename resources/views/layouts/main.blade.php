@@ -95,9 +95,9 @@
                 <p class="font-weight-medium text-center"><i class="fa fa-phone-alt mr-2"></i>{{ $profil[0]->telepon }}</p>
                 <p class="font-weight-medium text-center"><i class="fa fa-envelope mr-2"></i>{{ $profil[0]->email }}</p>
                 <div class="col card-header text-center">
-                    <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="{{ $profil[0]->twitter }}" class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="{{ $profil[0]->facebook }}" class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="{{ $profil[0]->instagram }}" class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-instagram"></i></a>
                     
                 </div>
             </div>
